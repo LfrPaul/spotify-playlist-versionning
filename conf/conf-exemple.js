@@ -5,6 +5,10 @@ let client_info = {
     password_db: "XX" 
 }
 
+let discord_webhook = {
+    url: 'https://discord.com/api/webhooks/XXX'
+}
+
 module.exports = {
     client_info
 };
