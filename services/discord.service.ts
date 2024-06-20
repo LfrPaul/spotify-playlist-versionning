@@ -1,6 +1,7 @@
+import { discord_webhook } from "../conf/conf";
+
 var request = require('request');
 
-const {discord_webhook} = require('./conf/conf');
 
 const colors = {
     "add": 2021216,
@@ -24,8 +25,6 @@ function sendWebhook(url: String, addSong: boolean, content: String, url_thumbna
           }
         ]
     }
-
-    console.log(body);
     
 
     request.post({
@@ -40,7 +39,6 @@ function sendWebhook(url: String, addSong: boolean, content: String, url_thumbna
 }
 
 function sendAddSongWebhook(id: String, title: String, artist: String, url_thumbnail: String) {
-    console.log("addSong");
     sendWebhook(`${spotify_base_url}${id}`, true, `**${title}** de **${artist}**`, url_thumbnail);
 }
 
