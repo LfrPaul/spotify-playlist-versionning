@@ -1,13 +1,13 @@
 export interface PlaylistEntity {
     id?: Number,
-    id_playlist?: String,
-    id_song?: String,
-    title?: String,
-    artist?: String,
-    album?: String,
+    id_playlist?: string,
+    id_song?: string,
+    title?: string,
+    artist?: string,
+    album?: string,
     duration?: Number,
-    url?: String,
-    image_url?: String,
+    url?: string,
+    image_url?: string,
     added_at?: Date,
     removed_at?: Date
 }

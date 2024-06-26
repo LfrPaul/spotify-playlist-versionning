@@ -9,6 +9,7 @@ export interface SongDto {
         },
         duration_ms: number,
         preview_url: string,
+        uri: string
     }
     added_at: Date,
     is_local: boolean

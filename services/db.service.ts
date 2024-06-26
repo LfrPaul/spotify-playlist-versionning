@@ -47,7 +47,7 @@ export async function checkSongExistenceInDb(id: string): Promise<boolean> {
 }
 
 export async function insertSong(song: SongEntity): Promise<void> {
-    await dbConnection.query('INSERT INTO Songs (id, title, artist, album, duration, url, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', [song.id_song, song.title, song.artist, song.album, song.duration, song.url, song.image_url]);
+    await dbConnection.query('INSERT INTO Songs (id, title, artist, album, duration, url, image_url, is_local) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [song.id_song, song.title, song.artist, song.album, song.duration, song.url, song.image_url, song.is_local?1:0]);
 }
 
 export async function insertSongInPlaylist(id_playlist: string, id_song: string): Promise<void> {

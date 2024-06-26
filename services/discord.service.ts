@@ -1,7 +1,7 @@
+import { DiscordEmbeds } from "../classes/discord-embed";
 import { discord_webhook } from "../conf/conf";
 
 var request = require('request');
-
 
 const colors = {
     "add": 2021216,
@@ -10,22 +10,23 @@ const colors = {
 
 const spotify_base_url = "https://open.spotify.com/intl-fr/track/";
 
-function sendWebhook(url: String, addSong: boolean, content: String, url_thumbnail: String) {
-    const body = {
+function sendWebhook(addSong: boolean, content: string, url_thumbnail: string, url?: string) {
+    const body: DiscordEmbeds = {
         "embeds": [
           {
             "title": addSong?"Ajout d'un son":"Suppression d'un son",
             "description": `${content} a été ${addSong?"ajouté à":"supprimé de"} la playlist`,
             "color": addSong?colors.add:colors.delete,
-            "fields": [],
             "thumbnail": {
               "url": url_thumbnail
-            },
-            "url": url
+            }
           }
         ]
     }
-    
+
+    if(url) {
+        body.embeds[0].url = url
+    }
 
     request.post({
         url: discord_webhook.url,
@@ -38,12 +39,12 @@ function sendWebhook(url: String, addSong: boolean, content: String, url_thumbna
 
 }
 
-function sendAddSongWebhook(id: String, title: String, artist: String, url_thumbnail: String) {
-    sendWebhook(`${spotify_base_url}${id}`, true, `**${title}** de **${artist}**`, url_thumbnail);
+function sendAddSongWebhook(id: string, title: string, artist: string, url_thumbnail: string, is_local: boolean) {
+    sendWebhook(true, artist?`**${title}** de **${artist}**`:`**${title}**`, url_thumbnail, !is_local?`${spotify_base_url}${id}`:undefined);
 }
 
-function sendDeleteSongWebhook(id: String, title: String, artist: String, url_thumbnail: String) {
-    sendWebhook(`${spotify_base_url}${id}`, false, `**${title}** de **${artist}**`, url_thumbnail);
+function sendDeleteSongWebhook(id: string, title: string, artist: string, url_thumbnail: string, is_local: boolean) {
+    sendWebhook(false, artist?`**${title}** de **${artist}**`:`**${title}**`, url_thumbnail, !is_local?`${spotify_base_url}${id}`:undefined);
 }
 
 export {

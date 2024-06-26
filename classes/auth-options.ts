@@ -1,5 +1,5 @@
 export type AuthOptions = {
-    url: String,
+    url: string,
     headers: any,
     form?: any,
     json: true

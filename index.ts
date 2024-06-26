@@ -23,7 +23,8 @@ async function main() {
             duration: song.track.duration_ms,
             url: song.track.preview_url ? song.track.preview_url : "",
             added_at: new Date(song.added_at),
-            image_url: song.track.album.images[1]?.url? song.track.album.images[1].url : "../images/track_image_default.jpg"
+            image_url: song.track.album.images[1]?.url? song.track.album.images[1].url : "",
+            is_local: song.is_local
         }
 
         return songEntity
@@ -49,7 +50,7 @@ async function main() {
     // son pas encore dans la table Playlists_Songs
     playlistSongsToInsert.forEach(async (song) => {
         await insertSongInPlaylist('7FTji2BE2MLqBgSVYoT3iK', song.id_song)
-        sendAddSongWebhook(song.id_song, song.title!!, song.artist!!, song.image_url!!)
+        sendAddSongWebhook(song.id_song, song.title!!, song.artist!!, song.image_url!!, song.is_local!!)
     });
 
     const playlistSongsToDelete: Array<SongEntity> = listeSongsDb.filter((song) => {
@@ -59,7 +60,7 @@ async function main() {
     
     playlistSongsToDelete.forEach(async (song) => {
         const songInfo = await getSongInfo(song.id_song)
-        sendDeleteSongWebhook(song.id_song, songInfo.title!!, songInfo.artist!!, songInfo.image_url!!)
+        sendDeleteSongWebhook(song.id_song, songInfo.title!!, songInfo.artist!!, songInfo.image_url!!, song.is_local!!)
 
         await removeSongFromPlaylist('7FTji2BE2MLqBgSVYoT3iK', song.id_song)
     });

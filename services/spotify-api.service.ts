@@ -42,8 +42,13 @@ export async function getPlaylistSongs(offset: number = 0): Promise<SongDto[]> {
         playlist.items.push(...nextSongs);
     }
 
-    const playlistSongs: Array<SongDto> = playlist.items.filter((song) => !song.is_local).map((song) => song as SongDto);
-
+    const playlistSongs: Array<SongDto> = playlist.items.map((song) => {
+        if(song.is_local) {
+            const id = song.track.uri.split(":").pop();
+            song.track.id = `local:${id}`
+        }
+        return song as SongDto
+    })
     
     return playlistSongs;
 }

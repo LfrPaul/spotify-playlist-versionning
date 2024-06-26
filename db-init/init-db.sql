@@ -20,7 +20,8 @@ CREATE TABLE `Songs` (
   `album` varchar(255) NOT NULL,
   `duration` int NOT NULL,
   `url` varchar(255) NOT NULL,
-  `image_url` varchar(255) NOT NULL
+  `image_url` varchar(255) NOT NULL,
+  `is_local` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 ALTER TABLE `Playlists`

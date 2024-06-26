@@ -10,4 +10,5 @@ export interface SongEntity {
     image_url?: string;
     added_at?: Date;
     removed_at?: Date;
+    is_local?: boolean
 }
