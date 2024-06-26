@@ -18,5 +18,6 @@ let discord_webhook = {
 
 export {
     client_info,
+    db_credentials,
     discord_webhook
 };
