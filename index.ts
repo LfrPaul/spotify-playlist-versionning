@@ -49,7 +49,7 @@ async function main() {
 
     // son pas encore dans la table Playlists_Songs
     playlistSongsToInsert.forEach(async (song) => {
-        await insertSongInPlaylist('7FTji2BE2MLqBgSVYoT3iK', song.id_song)
+        await insertSongInPlaylist('7FTji2BE2MLqBgSVYoT3iK', song.id_song, song.added_at!!)
         sendAddSongWebhook(song.id_song, song.title!!, song.artist!!, song.image_url!!, song.is_local!!)
     });
 

@@ -50,8 +50,8 @@ export async function insertSong(song: SongEntity): Promise<void> {
     await dbConnection.query('INSERT INTO Songs (id, title, artist, album, duration, url, image_url, is_local) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [song.id_song, song.title, song.artist, song.album, song.duration, song.url, song.image_url, song.is_local?1:0]);
 }
 
-export async function insertSongInPlaylist(id_playlist: string, id_song: string): Promise<void> {
-    await dbConnection.query('INSERT INTO Playlists_Songs (id_playlist, id_song, added_at) VALUES (?, ?, NOW())', [id_playlist, id_song]);
+export async function insertSongInPlaylist(id_playlist: string, id_song: string, added_at: Date): Promise<void> {
+    await dbConnection.query('INSERT INTO Playlists_Songs (id_playlist, id_song, added_at) VALUES (?, ?, ?)', [id_playlist, id_song, added_at]);
 }
 
 export async function removeSongFromPlaylist(id_playlist: string, id_song: string): Promise<void> {
