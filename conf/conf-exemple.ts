@@ -9,7 +9,7 @@ let db_credentials = {
     user: "spotify",
     password: "spotify",
     database: "spotify",
-    port: 3306
+    port: 3307
 }
 
 let discord_webhook = {
